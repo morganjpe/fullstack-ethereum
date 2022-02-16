@@ -1,6 +1,6 @@
-require("@nomiclabs/hardhat-waffle");
+import "@nomiclabs/hardhat-waffle";
 
-// This is a sample Hardhat task. To learn how to create your own go to
+// This is a sam  ple Hardhat task. To learn how to create your own go to
 // https://hardhat.org/guides/create-task.html
 // task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
 //   const accounts = await hre.ethers.getSigners();
@@ -16,7 +16,9 @@ require("@nomiclabs/hardhat-waffle");
 /**
  * @type import('hardhat/config').HardhatUserConfig
  */
-module.exports = {
+
+
+const config = {
   solidity: "0.8.4",
   networks: {
     hardhat: {
@@ -31,4 +33,6 @@ module.exports = {
     //   accounts: [process.env.pk]
     // }
   }
-};
+}
+
+export default config;
