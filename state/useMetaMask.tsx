@@ -17,19 +17,19 @@ const providerOptions = {
     }
 }
 
-const web3Modal = new Web3Modal({
-    network: "mainnet",
-    cacheProvider: false,
-    providerOptions,
-});
-
-const MetaMaskContext = createContext<IUseMetaMask | null>(null);
+const MetaMaskContext = createContext<IUseMetaMask | undefined>(undefined);
 
 export const MetaMaskProvider: React.FC = ({children}) => {
 
     const [account, setAccount] = useState<string | null>(null);
 
     const connect = async () => {
+        const web3Modal = new Web3Modal({
+            network: "mainnet",
+            cacheProvider: false,
+            providerOptions,
+        });
+
         const connection = await web3Modal.connect();
         const provider = new ethers.providers.Web3Provider(connection);
 
@@ -52,9 +52,11 @@ export const MetaMaskProvider: React.FC = ({children}) => {
 }
 
 export const useMetaMask = () => {
-    try {
-        return useContext(MetaMaskContext)
-    } catch (error) {
-        console.log('useMetaMask must be used within MetaMaskProvider', error);
+    const context = useContext(MetaMaskContext);
+
+    if(context === undefined) {
+        throw new Error('useCount must be used within a CountProvider')
     }
+
+    return context;
 }
