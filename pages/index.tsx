@@ -7,13 +7,13 @@ import {useMetaMask, MetaMaskProvider} from '../state/useMetaMask'
 
 const TestComponent = () => {
 
-  const {connect} = useMetaMask();
+  const {connect, account} = useMetaMask();
 
   const onButtonClick = () => connect();
 
   return (
     <div>
-      <button onClick={onButtonClick}>test</button>
+      {account ? account : <button onClick={onButtonClick}>test</button>}
     </div>
   )
 }
